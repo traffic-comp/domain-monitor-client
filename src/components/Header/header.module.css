@@ -1,0 +1,24 @@
+.header {
+  padding: 30px;
+  display: grid;
+  align-items: center;
+  gap: 10px;
+  grid-template-columns: auto auto 1fr;
+  color: #fff;
+}
+
+.header button {
+  justify-self: end;
+}
+.header p {
+  align-self: flex-end;
+  font-size: 16px;
+  color: var(--gray);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+

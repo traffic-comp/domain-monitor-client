@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Roboto;
+}
+
+:root {
+  --gray: #b0bbe3;
+  --inputColor: #aeb9e1;
+  --inp-border:#343B4F;
+  --bg: #081028;
+  --active-color: #0b1739;
+  --pink: #f429ff;
+  --dark-pink: #b715c0;
+  --white: #ffffff;
+  --success: #14ca74;
+  --success-dark: #127748;
+  --warning: #fdb52a;
+  --error: #ff5a65;
+  --good: #00c2ff;
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100vw;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+li {
+  list-style: none;
+}
+/* WebKit-браузеры */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--active-color); /* тёмный фон трека */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray); /* серый ползунок */
+  border-radius: 4px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pink); /* розовый при наведении */
+  box-shadow: 0 0 6px var(--dark-pink);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray) var(--active-color);
+}
+
+.success {
+  color: var(--success) !important;
+}
+.warning {
+  color: var(--warning) !important;
+}
+.error {
+  color: var(--error) !important;
+}
+
+.pointer {
+  cursor: pointer;
+}

@@ -1,0 +1,35 @@
+.sidebarItem {
+  display: flex;
+  align-items: center;
+  padding: 6px 11px;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebarItem a {
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--gray);
+  text-decoration: none;
+}
+
+.active {
+  background: var(--active-color);
+  border-radius: 6px;
+  border-left: 3px solid var(--pink);
+}
+
+.active svg {
+  fill: var(--pink);
+}
+.active a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.link {
+  color: var(--white);
+  text-decoration: none;
+}
