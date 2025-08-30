@@ -1,106 +1,3 @@
-// import { useEffect, useState } from "react";
-// import CloseIcon from "../../icons/CloseIcon/CloseIcon";
-// import type { DomainInfoProps } from "./DomainInfo.props";
-// import s from "./domain.module.css";
-
-// const DomainInfo = ({ detailedInfo, ...props }: DomainInfoProps) => {
-//   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-//   useEffect(() => {
-//     if (detailedInfo && detailedInfo.length) {
-//       setIsOpen(!isOpen);
-//     }
-//   }, [detailedInfo]);
-
-//   const dt = detailedInfo[0];
-
-//   return (
-//     <>
-//       {isOpen ? (
-//         <div className={s.overlay} {...props} onClick={() => setIsOpen(false)}>
-//           <div className={s.domaininfo}>
-//             <div className={s.header}>
-//               <p className={s.title}>Log info - {dt.domain}</p>
-//               <CloseIcon click={() => setIsOpen(false)} className="pointer" />
-//             </div>
-//             <ul className={s.body}>
-//               <li>
-//                 <span>fullURL</span>
-//                 <span>{dt.fullUrl}</span>
-//               </li>
-//               <li>
-//                 <span>Domain</span>
-//                 <span>{dt.domain}</span>
-//               </li>
-//               <li>
-//                 <span>ip</span>
-//                 <span>{dt?.ip}</span>
-//               </li>
-//               <li className={s.devider}>
-//                 <span>SSL</span>
-//                 <span>{dt.sslInfo.issuer}</span>
-//               </li>
-
-//               <li>
-//                 <span>Balancer ip</span>
-//                 <span>{dt.balancerPing.ip}</span>
-//               </li>
-//               <li>
-//                 <span>Nameserver</span>
-//                 {dt.ns.length ? (
-//                   <span className="success">{dt.ns.length}</span>
-//                 ) : (
-//                   <span className="error">{dt.ns.length}</span>
-//                 )}
-//               </li>
-//               <li>
-//                 <span>DNS</span>
-//                 <span>{dt.balancerPing.dnsHost}</span>
-//               </li>
-//               <li className={s.devider}>
-//                 <span>ping</span>
-//                 <span>
-//                   {dt.balancerPing.pingAlive ? "true" : "false"},{" "}
-//                   {dt.balancerPing.pingTime}ms
-//                 </span>
-//               </li>
-//               <li>
-//                 <span>port80</span>
-//                 {dt.port80Open ? (
-//                   <span className="success">true</span>
-//                 ) : (
-//                   <span className="err">false</span>
-//                 )}
-//               </li>
-//               <li>
-//                 <span>port443</span>
-//                 {dt.port443Open ? (
-//                   <span className="success">true</span>
-//                 ) : (
-//                   <span className="err">false</span>
-//                 )}
-//               </li>
-//               <li>
-//                 <span>httpAlive</span>
-//                 {dt.httpAlive ? (
-//                   <span className="success">true</span>
-//                 ) : (
-//                   <span className="err">false</span>
-//                 )}
-//               </li>
-//               <li>
-//                 <span>httpStatus</span>
-//                 <span>{dt.httpStatus}</span>
-//               </li>
-//             </ul>
-//           </div>
-//         </div>
-//       ) : null}
-//     </>
-//   );
-// };
-
-// export default DomainInfo;
 import { useEffect, useState } from "react";
 import CloseIcon from "../../icons/CloseIcon/CloseIcon";
 import type { DomainInfoProps } from "./DomainInfo.props";
@@ -144,11 +41,6 @@ const DomainInfo = ({ detailedInfo = [], ...props }: DomainInfoProps) => {
             <span>SSL</span>
             <span>{dt?.sslInfo?.issuer ?? "—"}</span>
           </li>
-
-          <li>
-            <span>Balancer ip</span>
-            <span>{dt?.balancerPing?.ip ?? "—"}</span>
-          </li>
           <li>
             <span>Nameserver</span>
             {dt?.ns && dt.ns.length > 0 ? (
@@ -156,17 +48,6 @@ const DomainInfo = ({ detailedInfo = [], ...props }: DomainInfoProps) => {
             ) : (
               <span className="error">0</span>
             )}
-          </li>
-          <li>
-            <span>DNS</span>
-            <span>{dt?.balancerPing?.dnsHost ?? "—"}</span>
-          </li>
-          <li className={s.devider}>
-            <span>ping</span>
-            <span>
-              {dt?.balancerPing?.pingAlive ? "true" : "false"},{" "}
-              {dt?.balancerPing?.pingTime ?? "—"}ms
-            </span>
           </li>
           <li>
             <span>port80</span>
