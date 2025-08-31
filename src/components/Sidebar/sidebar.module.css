@@ -7,3 +7,9 @@
   flex-direction: column;
   gap: 21px;
 }
+
+@media (width<=768px) {
+  .sidebarlogo {
+    display: none;
+  }
+}

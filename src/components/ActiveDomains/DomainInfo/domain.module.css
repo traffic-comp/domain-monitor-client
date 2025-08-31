@@ -62,3 +62,9 @@
   margin-bottom: 0;
   border-bottom: 1px solid #495271;
 }
+
+@media (width<= 375px) {
+  .domaininfo {
+    width: 320px;
+  }
+}

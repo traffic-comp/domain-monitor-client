@@ -46,18 +46,27 @@
   outline: none;
 }
 
-
-.headertext{
+.headertext {
   color: var(--white);
 }
 
-.list{
+.list {
   color: var(--white);
 }
 .list li {
   margin-bottom: 10px;
 }
 
-.status{
+.status {
   color: var(--white);
+}
+
+@media (width<=768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .form label{
+    flex-direction: column;
+  }
 }

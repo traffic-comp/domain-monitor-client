@@ -61,3 +61,10 @@
   background: var(--error);
   cursor: pointer;
 }
+
+@media (width<= 425px) {
+  .thead tr,
+  .tbody tr {
+    gap: 10px;
+  }
+}
