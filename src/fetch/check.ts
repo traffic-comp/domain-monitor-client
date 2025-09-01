@@ -29,7 +29,7 @@ export const checkDomain = async (
 };
 
 export const checklinks = async (
-  domain: string | string[] = []
+  domain: string | null | string[] = []
 ): Promise<DetailDomainInfo[]> => {
   try {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/check/links`, {
@@ -56,11 +56,14 @@ export const checkReestrIps = async (
   ips: string[] = []
 ): Promise<ReestrIpsResult> => {
   try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/check/reestr-ips`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ips }),
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/check/reestr-ips`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ips }),
+      }
+    );
     const data = await res.json();
 
     if (!res.ok) {
@@ -80,11 +83,14 @@ export const checkReestrDomains = async (
   domains: string[] = []
 ): Promise<ReestrDomainsResult> => {
   try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/check/reestr-domains`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ domains }),
-    });
+    const res = await fetch(
+      `${import.meta.env.VITE_API_URL}/check/reestr-domains`,
+      {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ domains }),
+      }
+    );
     const data = await res.json();
 
     if (!res.ok) {

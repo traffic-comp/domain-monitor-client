@@ -7,6 +7,7 @@ import { deleteProxy, getProxy } from "../../../fetch/proxy";
 import type { Proxy } from "../../../interfaces/proxy";
 import cn from "classnames";
 import ProxyController from "./ProxyController/ProxyController";
+import CloseIcon from "../../../components/icons/CloseIcon/CloseIcon";
 
 const ProxyList = () => {
   const [proxyList, setProxyList] = useState<Proxy[]>([]);
@@ -61,6 +62,7 @@ const ProxyList = () => {
             <th>Pass</th>
             <th>User</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -75,19 +77,59 @@ const ProxyList = () => {
                   <td>{proxy.user}</td>
                   <td
                     ref={isOpenIdx === idx ? actionRef : null}
-                    className={cn("pointer", s.right)}
+                    className={cn("pointer", s.right, s.lastchild)}
                     onClick={async (e) => {
                       e.stopPropagation();
                       await deleteProxy(proxy.proxyType);
                     }}
                   >
-                    X
+                    <CloseIcon />
                   </td>
+                  <td></td>
                 </tr>
               ))
             : null}
         </tbody>
       </table>
+
+      <div className={s.cards}>
+        {proxyList.length
+          ? proxyList.map((proxy) => (
+              <div className={s.card}>
+                <div
+                  className={s.close}
+                  onClick={async (e) => {
+                    e.stopPropagation();
+                    await deleteProxy(proxy.proxyType);
+                  }}
+                >
+                  <CloseIcon />
+                </div>
+                <div className={s.body}>
+                  <div className={s.bodyrow}>
+                    <span>Name:</span> <span>{proxy.proxyType}</span>
+                  </div>
+                  <div className={s.bodyrow}>
+                    <span>Type:</span> <span>{proxy.type}</span>
+                  </div>
+                  <div className={s.bodyrow}>
+                    <span>Host:</span> <span>{proxy.host}</span>
+                  </div>
+                  <div className={s.bodyrow}>
+                    <span>Port:</span> <span>{proxy.port}</span>
+                  </div>
+                  <div className={s.bodyrow}>
+                    <span>Pass:</span> <span>{proxy.pass}</span>
+                  </div>
+                  <div className={s.bodyrow}>
+                    <span>User:</span> <span>{proxy.user}</span>
+                  </div>
+                </div>
+              </div>
+            ))
+          : null}
+      </div>
+
       {isOpen ? (
         <ProxyController
           proxyData={proxyData}

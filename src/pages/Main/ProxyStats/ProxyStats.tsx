@@ -1,4 +1,4 @@
-import { useEffect, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 
 import s from "./proxystats.module.css";
 
@@ -14,10 +14,13 @@ import Graphic from "../Graphic/Graphic.tsx";
 import { useDomainStore } from "../../../sotre/domain.ts";
 import { useGraphicStore } from "../../../sotre/graphic.ts";
 import AddCompaingWindow from "./AddCompaingWindow/AddCompaingWindow.tsx";
+import { checklinks } from "../../../fetch/check.ts";
+import Loader from "../../../components/Loader/Loader.tsx";
 
 const ProxyStats = ({ ...props }: ProxyStatsProps): JSX.Element => {
   const { setActiveDomains, activeDomains } = useDomainStore();
   const { setIds, ids } = useGraphicStore();
+  const [isRefresh, setIsRefresh] = useState<boolean>(false);
 
   const fetchDomain = async () => {
     const d = await getDomains();
@@ -42,15 +45,25 @@ const ProxyStats = ({ ...props }: ProxyStatsProps): JSX.Element => {
     getIdFromLs();
   }, []);
 
+  const refresh = async () => {
+    setIsRefresh(true);
+    await checklinks(null).finally(() => setIsRefresh(false));
+    await fetchDomain();
+  };
+
   return (
     <div className={s.proxyStats} {...props}>
       <div className={s.left}>
         <div className={cn(s.container, s.domainsOperators)}>
           <BlockHeader title="Active Domains">
-            <Button onClick={fetchDomain}>
-              <RefreshIcon />
-              Refresh
-            </Button>
+            {isRefresh ? (
+              <Loader isText={false} width="30px" height="30px" />
+            ) : (
+              <Button click={refresh}>
+                <RefreshIcon />
+                Refresh
+              </Button>
+            )}
           </BlockHeader>
           <div className={s.scrollcontainer}>
             <ActiveDomains activeDomains={activeDomains} />

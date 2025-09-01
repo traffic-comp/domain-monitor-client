@@ -58,7 +58,12 @@ const ActiveDomains = ({
   return (
     <>
       <table {...props} className={s.table}>
-        <thead className={s.thead}>
+        <thead
+          className={s.thead}
+          // style={{
+          //   gridTemplateColumns: `repeat(${proxyList.length + 2}, 1fr)`,
+          // }}
+        >
           <tr>
             <th></th>
             {proxyList.length
@@ -69,7 +74,12 @@ const ActiveDomains = ({
             <th></th>
           </tr>
         </thead>
-        <tbody className={s.tbody}>
+        <tbody
+          className={s.tbody}
+          // style={{
+          //   gridTemplateColumns: `repeat(${proxyList.length + 1}, 1fr)`,
+          // }}
+        >
           {activeDomains.length
             ? activeDomains.map((i: IActiveDomains, idx: number) => (
                 <tr
@@ -99,7 +109,7 @@ const ActiveDomains = ({
                   {i.stability.length ? (
                     <td
                       onClick={(e) => {
-                        e.stopPropagation(); // ⬅️ предотвращаем вызов deactivate
+                        e.stopPropagation();
                         fetchcheckDomain(i.domain);
                       }}
                       className={cn(s.showedlog, "pointer")}
@@ -109,7 +119,7 @@ const ActiveDomains = ({
                   ) : (
                     <td
                       onClick={(e) => {
-                        e.stopPropagation(); // ⬅️ предотвращаем вызов deactivate
+                        e.stopPropagation();
                         fetchcheckDomain(i.domain);
                       }}
                       className={cn(s.showedlog, "pointer")}

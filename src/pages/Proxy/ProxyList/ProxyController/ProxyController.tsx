@@ -5,7 +5,6 @@ import type { ProxyControllerProps } from "./ProxyController.props";
 import s from "./addproxy.module.css";
 import { setProxy } from "../../../../fetch/proxy";
 import type { Proxy } from "../../../../interfaces/proxy";
-// Интерфейс для формы
 
 const ProxyController = ({ setIsOpen, ...props }: ProxyControllerProps) => {
   const [form, setForm] = useState<Proxy>({

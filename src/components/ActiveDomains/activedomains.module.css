@@ -52,7 +52,9 @@
 .tbody tr:last-child {
   border-bottom: none;
 }
-
+.showedlog {
+  grid-column: -2;
+}
 .showedlog svg:hover {
   fill: var(--pink);
 }

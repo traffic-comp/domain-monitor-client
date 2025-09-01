@@ -1,10 +1,15 @@
 import s from "./loader.module.css";
 import type { LoaderProps } from "./Loader.props";
-const Loader = ({ ...props }: LoaderProps) => {
+const Loader = ({
+  width = "50px",
+  height = "50px",
+  isText = true,
+  ...props
+}: LoaderProps) => {
   return (
     <div className={s.loaderContainer} {...props}>
-      <div className={s.loader} />
-      <div className={s.loaderText}>Loading...</div>
+      <div className={s.loader} style={{ width, height }} />
+      {isText ? <div className={s.loaderText}>Loading...</div> : null}
     </div>
   );
 };
