@@ -5,7 +5,6 @@ import cn from "classnames";
 import type {
   DetailDomainInfo,
   IActiveDomains,
-  Stability,
 } from "../../interfaces/domain";
 import React, { useEffect, useState } from "react";
 import { checkDomain } from "../../fetch/check";
@@ -58,28 +57,17 @@ const ActiveDomains = ({
   return (
     <>
       <table {...props} className={s.table}>
-        <thead
-          className={s.thead}
-          // style={{
-          //   gridTemplateColumns: `repeat(${proxyList.length + 2}, 1fr)`,
-          // }}
-        >
+        <thead className={s.thead}>
           <tr>
-            <th></th>
-            {proxyList.length
-              ? proxyList.map((item: string, idx: number) => (
-                  <th key={idx}>{item ? item : null}</th>
-                ))
-              : null}
+            <th>Домен</th>
+            {proxyList.map((proxy, idx) => (
+              <th key={idx}>{proxy}</th>
+            ))}
             <th></th>
           </tr>
         </thead>
-        <tbody
-          className={s.tbody}
-          // style={{
-          //   gridTemplateColumns: `repeat(${proxyList.length + 1}, 1fr)`,
-          // }}
-        >
+
+        <tbody className={s.tbody}>
           {activeDomains.length
             ? activeDomains.map((i: IActiveDomains, idx: number) => (
                 <tr
@@ -92,41 +80,34 @@ const ActiveDomains = ({
                       : undefined
                   }
                 >
-                  {i.stability.length ? (
-                    <td key={i._id}>{i.domain}</td>
-                  ) : (
-                    <td key={i._id}>{i.domain}</td>
-                  )}
+                  {/* Домен */}
+                  <td>{i.domain}</td>
 
-                  {i.stability.length
-                    ? i.stability.map((st: Stability) => (
-                        <td className={cn(setStatus(st.stats))} key={st._id}>
-                          {st.stats.toFixed()}%
-                        </td>
-                      ))
-                    : proxyList.map((_, idx) => <td key={idx}>n/d</td>)}
+                  {/* Колонки под прокси */}
+                  {proxyList.map((proxy, idx) => {
+                    const stability = i.stability.find(
+                      (st) => st.proxyName === proxy
+                    );
 
-                  {i.stability.length ? (
-                    <td
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        fetchcheckDomain(i.domain);
-                      }}
-                      className={cn(s.showedlog, "pointer")}
-                    >
-                      <LogoIcon />
-                    </td>
-                  ) : (
-                    <td
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        fetchcheckDomain(i.domain);
-                      }}
-                      className={cn(s.showedlog, "pointer")}
-                    >
-                      <LogoIcon />
-                    </td>
-                  )}
+                    return stability ? (
+                      <td className={cn(setStatus(stability.stats))} key={idx}>
+                        {stability.stats.toFixed()}%
+                      </td>
+                    ) : (
+                      <td key={idx}>n/d</td>
+                    );
+                  })}
+
+                  {/* Икона лога всегда последняя */}
+                  <td
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      fetchcheckDomain(i.domain);
+                    }}
+                    className={cn(s.showedlog, "pointer")}
+                  >
+                    <LogoIcon />
+                  </td>
                 </tr>
               ))
             : null}
