@@ -5,6 +5,7 @@ import type { ProxyControllerProps } from "./ProxyController.props";
 import s from "./addproxy.module.css";
 import { setProxy } from "../../../../fetch/proxy";
 import type { Proxy } from "../../../../interfaces/proxy";
+import Button from "../../../../components/Button/Button";
 
 const ProxyController = ({ setIsOpen, ...props }: ProxyControllerProps) => {
   const [form, setForm] = useState<Proxy>({
@@ -107,9 +108,9 @@ const ProxyController = ({ setIsOpen, ...props }: ProxyControllerProps) => {
             />
           </label>
 
-          <button type="button" onClick={handleSubmit}>
+          <Button click={handleSubmit} style={{ alignItems: "center" }}>
             Add Proxy
-          </button>
+          </Button>
         </form>
       </div>
     </div>

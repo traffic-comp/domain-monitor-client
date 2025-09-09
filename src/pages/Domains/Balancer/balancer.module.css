@@ -1,0 +1,26 @@
+.container {
+  padding: 20px;
+  color: var(--white);
+  background: var(--active-color);
+  border-radius: 12px;
+  margin: 0 20px 20px;
+}
+.table {
+  width: 100%;
+}
+.table tbody tr {
+  display: grid;
+  grid-template-columns: 120px 120px auto auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.selected {
+  display: flex;
+  gap: 10px;
+}
+
+.lasttd{
+  justify-self: flex-end;
+}

@@ -46,7 +46,7 @@ const ProxyList = () => {
   return (
     <div className={s.container}>
       <BlockHeader title="Proxy">
-        <Button onClick={() => setIsOpen(true)}>
+        <Button click={() => setIsOpen(true)}>
           <PlusIcon />
           Add Proxy
         </Button>

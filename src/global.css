@@ -10,7 +10,7 @@
 :root {
   --gray: #b0bbe3;
   --inputColor: #aeb9e1;
-  --inp-border:#343B4F;
+  --inp-border: #343b4f;
   --bg: #081028;
   --active-color: #0b1739;
   --pink: #f429ff;
@@ -74,4 +74,16 @@ li {
 
 .pointer {
   cursor: pointer;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--white);
+  background: var(--active-color);
+  border: 1px solid var(--inp-border);
+  border-radius: 6px;
+  outline: none;
 }
