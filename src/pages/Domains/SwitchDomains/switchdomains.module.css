@@ -16,6 +16,10 @@
   overflow-y: auto;
 }
 
+.right{
+  width: 100%;
+}
+
 .section {
   padding: 30px;
   max-height: 475px;
