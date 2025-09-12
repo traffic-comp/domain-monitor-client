@@ -1,4 +1,4 @@
-import { useEffect, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import Button from "../../../components/Button/Button";
 import RefreshIcon from "../../../components/icons/RefreshIcon/RefreshIcon";
 import s from "./switchdomains.module.css";
@@ -8,11 +8,13 @@ import BlockHeader from "../../../components/BlockHeader/BlockHeader";
 import { getKTDomains, setActiveDomain } from "../../../fetch/domains";
 import cn from "classnames";
 import { useDomainStore } from "../../../sotre/domain";
+import LockIcon from "../../../components/icons/LockIcon/LockIcon";
 
 const SwitchDomains = ({
   fetchDomains,
   ...props
 }: SwitchDomainsProps): JSX.Element => {
+  const [isActive, setIsActive] = useState<boolean>(false);
   const { setKtDomains, ktDomains, addActiveDomain, activeDomains } =
     useDomainStore();
 
@@ -24,14 +26,16 @@ const SwitchDomains = ({
   useEffect(() => {
     fetchKTDomains();
   }, []);
-
+  
   const addActive = async (name: string) => {
-    setActiveDomain(name);
-    addActiveDomain({
-      domain: name,
-      _id: "1",
-      stability: [],
-    });
+    if (isActive) {
+      setActiveDomain(name);
+      addActiveDomain({
+        domain: name,
+        _id: "1",
+        stability: [],
+      });
+    }
   };
 
   return (
@@ -39,10 +43,14 @@ const SwitchDomains = ({
       <section className={cn(s.section, s.left)}>
         <BlockHeader title="All Domains"></BlockHeader>
 
-        <ul className={s.list}>
+        <ul className={cn(s.list)}>
           {ktDomains.length
             ? ktDomains.map((domain) => (
-                <li key={domain.name} onClick={() => addActive(domain.name)}>
+                <li
+                  key={domain.name}
+                  className={cn({ [s.lock]: !isActive })}
+                  onClick={() => addActive(domain.name)}
+                >
                   {domain.name}
                 </li>
               ))
@@ -51,16 +59,24 @@ const SwitchDomains = ({
       </section>
       <section className={cn(s.section, s.right)}>
         <BlockHeader title="Active Domains">
-          <Button onClick={fetchDomains}>
-            <RefreshIcon />
-            Refresh
-          </Button>
+          <div className={s.headercontainer}>
+            <LockIcon
+              onClick={() => setIsActive(!isActive)}
+              isActive={isActive}
+              className="pointer"
+            />
+            <Button onClick={fetchDomains}>
+              <RefreshIcon />
+              Refresh
+            </Button>
+          </div>
         </BlockHeader>
 
         <div className={s.scrollcontainer}>
           <ActiveDomains
             activeDomains={activeDomains}
             isDeactivateDomain={true}
+            isActive={isActive}
           />
         </div>
       </section>

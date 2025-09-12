@@ -2,10 +2,7 @@ import LogoIcon from "../icons/LogoIcon/LogIcon";
 import s from "./activedomains.module.css";
 import type { ActiveDomainsProps } from "./ActiveDomains.props";
 import cn from "classnames";
-import type {
-  DetailDomainInfo,
-  IActiveDomains,
-} from "../../interfaces/domain";
+import type { DetailDomainInfo, IActiveDomains } from "../../interfaces/domain";
 import React, { useEffect, useState } from "react";
 import { checkDomain } from "../../fetch/check";
 import DomainInfo from "./DomainInfo/DomainInfo";
@@ -16,6 +13,7 @@ import { useDomainStore } from "../../sotre/domain";
 const ActiveDomains = ({
   activeDomains,
   isDeactivateDomain,
+  isActive,
   ...props
 }: ActiveDomainsProps) => {
   const [proxyList, setProxyList] = useState<string[]>([]);
@@ -49,9 +47,11 @@ const ActiveDomains = ({
     e: React.MouseEvent<HTMLTableRowElement>,
     domain: string
   ) => {
-    e.stopPropagation();
-    deleteActivateDomain(domain);
-    removeActiveDomain(domain);
+    if (isActive) {
+      e.stopPropagation();
+      deleteActivateDomain(domain);
+      removeActiveDomain(domain);
+    }
   };
 
   return (
@@ -72,7 +72,10 @@ const ActiveDomains = ({
             ? activeDomains.map((i: IActiveDomains, idx: number) => (
                 <tr
                   key={idx}
-                  className={cn({ [s.deactivateDomain]: isDeactivateDomain })}
+                  className={cn({
+                    [s.deactivateDomain]: isDeactivateDomain,
+                    [s.lock]: !isActive,
+                  })}
                   onClick={
                     isDeactivateDomain
                       ? (e: React.MouseEvent<HTMLTableRowElement>) =>

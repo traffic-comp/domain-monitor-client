@@ -8,4 +8,5 @@ export interface ActiveDomainsProps
   > {
   activeDomains: IActiveDomains[];
   isDeactivateDomain?: boolean;
+  isActive?: boolean;
 }

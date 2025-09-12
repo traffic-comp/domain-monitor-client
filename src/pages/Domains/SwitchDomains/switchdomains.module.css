@@ -16,7 +16,7 @@
   overflow-y: auto;
 }
 
-.right{
+.right {
   width: 100%;
 }
 
@@ -52,6 +52,17 @@
 .list li:hover {
   background: var(--success-dark);
   cursor: pointer;
+}
+
+.list li.lock:hover {
+  background: transparent;
+  cursor:  not-allowed;
+}
+
+.headercontainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 @media (width<=768px) {
